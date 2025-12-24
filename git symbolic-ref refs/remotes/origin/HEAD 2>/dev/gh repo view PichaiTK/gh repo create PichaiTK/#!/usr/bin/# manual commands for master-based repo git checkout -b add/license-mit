@@ -1,0 +1,8 @@
+# manual commands for master-based repo
+git checkout -b add/license-mit
+# create LICENSE (paste content)
+git add LICENSE
+git commit -m "chore: add MIT license (Copyright 2025 PichaiTK)"
+git push -u origin add/license-mit
+# create PR targeting master
+gh pr create --title "Add MIT license" --body "Add MIT license (Copyright 2025 PichaiTK)" --base master --head add/license-mit
