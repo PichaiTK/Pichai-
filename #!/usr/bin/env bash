@@ -1,0 +1,87 @@
+#!/usr/bin/env bash
+# add_license.sh
+# Usage:
+#   ./add_license.sh [MIT]
+# This script:
+# - ensures it's run inside a git repo
+# - creates a branch (add/license-mit-<ts>)
+# - checks for existing LICENSE and exits if present (unless --force)
+# - writes MIT license to LICENSE
+# - commits and pushes branch
+# - if gh CLI available, offers to create a PR
+
+set -euo pipefail
+
+LICENSE_TYPE="${1:-MIT}"
+FORCE=0
+
+# simple parse for --force
+if [[ "${LICENSE_TYPE}" == "--force" ]]; then
+  FORCE=1
+  LICENSE_TYPE="MIT"
+fi
+
+if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  echo "Error: not inside a git repository"
+  exit 1
+fi
+
+# detect upstream default branch (main or master)
+DEFAULT_BRANCH="main"
+if git remote show origin | grep "HEAD branch" >/dev/null 2>&1; then
+  DEFAULT_BRANCH=$(git remote show origin | sed -n 's/.*HEAD branch: //p' | tr -d '\r\n')
+fi
+
+TS=$(date +%s)
+BRANCH="add/license-mit-${TS}"
+git fetch origin ${DEFAULT_BRANCH} || true
+git checkout -b "${BRANCH}"
+
+if [[ -f LICENSE && "${FORCE}" -ne 1 ]]; then
+  echo "LICENSE already exists. Use --force to overwrite or manually handle."
+  exit 1
+fi
+
+cat > LICENSE <<'EOF'
+MIT License
+
+Copyright (c) 2025 PichaiTK
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+EOF
+
+git add LICENSE
+git commit -m "chore: add MIT license (Copyright 2025 PichaiTK)"
+git push -u origin "${BRANCH}"
+
+echo "Pushed branch ${BRANCH} to origin."
+
+if command -v gh >/dev/null 2>&1; then
+  echo
+  echo "gh CLI detected. Creating PR..."
+  gh pr create --title "Add MIT license" --body "Add MIT License (Copyright 2025 PichaiTK)." --base "${DEFAULT_BRANCH}" --head "${BRANCH}"
+  echo "PR created (if gh CLI had permissions)."
+else
+  echo
+  echo "gh CLI not found. To create a PR manually:"
+  echo "  1) Go to https://github.com/<owner>/<repo>/pulls and create a PR from ${BRANCH} into ${DEFAULT_BRANCH}."
+  echo "  2) Or install GitHub CLI (gh) and re-run this script."
+fi
+
+exit 0
