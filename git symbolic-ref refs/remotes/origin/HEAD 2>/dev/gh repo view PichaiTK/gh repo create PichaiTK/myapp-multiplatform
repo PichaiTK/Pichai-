@@ -1,0 +1,1 @@
+gh repo create PichaiTK/myapp-multiplatform --public --description "MyApp Multiplatform" --source=. --remote=origin
