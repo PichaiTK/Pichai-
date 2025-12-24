@@ -1,0 +1,1 @@
+gh pr create --title "Add MIT license" --body "Add MIT license (Copyright 2025 PichaiTK)." --base main --head add/license-mit
