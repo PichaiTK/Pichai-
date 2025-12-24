@@ -1,0 +1,10 @@
+Thank you for your interest in contributing!
+
+Guidelines:
+- Fork the repository and create a branch named `feature/xxx` or `fix/xxx`.
+- Run linters and tests before submitting a PR.
+- Write clear PR titles and descriptions; link any related issues.
+- For code style, follow the repository ESLint/Prettier config (if present).
+- Security: Do not commit secrets or credentials. Use environment variables.
+
+Submit a PR against the default branch (main/master). Core maintainers will review and merge.
