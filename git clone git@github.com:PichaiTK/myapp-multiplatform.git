@@ -1,0 +1,9 @@
+git clone git@github.com:PichaiTK/myapp-multiplatform.git
+cd myapp-multiplatform
+git checkout -b add/license-mit
+# create LICENSE file (paste content from above)
+git add LICENSE
+git commit -m "chore: add MIT license (Copyright 2025 PichaiTK)"
+git push -u origin add/license-mit
+# create PR (via web or gh)
+gh pr create --title "Add MIT license" --body "Add MIT license (Copyright 2025 PichaiTK)." --base main --head add/license-mit
