@@ -1,0 +1,5 @@
+# ถ้าต้องการตั้งเป็น HTTPS
+git remote set-url origin https://github.com/PichaiTK/myapp-multiplatform.git
+
+# หรือใช้ SSH
+git remote set-url origin git@github.com:PichaiTK/myapp-multiplatform.git
