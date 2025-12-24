@@ -1,0 +1,19 @@
+Add MIT License
+
+What:
+- Adds a LICENSE file containing the MIT License.
+- Copyright (c) 2025 PichaiTK.
+
+Why:
+- Clarifies licensing and grants permissive usage to contributors and downstream users.
+- MIT chosen for permissive reuse and simplicity.
+
+Notes:
+- If you prefer Apache-2.0 or GPLv3, please comment and I will update to the preferred license.
+- No code changes are included. This commit only adds licensing metadata.
+
+How to verify:
+- Confirm LICENSE file in repo root.
+- Confirm license badge (optional) added to README in a follow-up PR.
+
+Signed-off-by: PichaiTK
