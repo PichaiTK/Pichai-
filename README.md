@@ -40,7 +40,7 @@ git clone git@github.com:PichaiTK/myapp-multiplatform.git
 cd myapp-multiplatform
 
 
-# สร้างไฟล์ LICENSE (PowerShell here-string)
+#  LICENSE (PowerShell here-string)
 
 @" MIT License
 
