@@ -1,0 +1,6 @@
+git checkout main
+git pull origin main
+# วางไฟล์ LICENSE ที่สร้างไว้
+git add LICENSE
+git commit -m "chore: add MIT license"
+git push origin main
