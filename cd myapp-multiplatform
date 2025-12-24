@@ -1,0 +1,10 @@
+cd myapp-multiplatform
+git checkout -b add/license-mit
+# สร้างไฟล์ LICENSE ด้วย editor หรือ heredoc:
+cat > LICENSE <<'EOF'
+(วางเนื้อหา LICENSE MIT จากด้านบนที่ผมให้)
+EOF
+
+git add LICENSE
+git commit -m "chore: add MIT license (Copyright 2025 PichaiTK)"
+git push -u origin add/license-mit
