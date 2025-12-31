@@ -1,4 +1,5 @@
-# Pichai
+
+# <img width="1645" height="1645" alt="5968" src="https://github.com/user-attachments/assets/932dbcf7-6a59-47c9-8b4f-c7081ab82ee7" />
 myapp/
 ├─ client/ (HTML/CSS/JS หรือ Next.js)
 │  ├─ layouts/      # Layout Builder / Theme
